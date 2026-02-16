@@ -1,0 +1,43 @@
+services:
+  moltclaw:
+    build: .
+    container_name: moltclaw-gateway
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=postgres://user:pass@db:5432/moltclaw
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - moltclaw-network
+
+  db:
+    image: postgres:16-alpine
+    container_name: moltclaw-db
+    restart: always
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=moltclaw
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user -d moltclaw" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - moltclaw-network
+
+networks:
+  moltclaw-network:
+    driver: bridge
+
+volumes:
+  pgdata:
