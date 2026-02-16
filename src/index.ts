@@ -41,11 +41,15 @@ app.post('/api/v1/fleet/heartbeat', (c) => {
 
 app.get('/', (c) => c.text('MoltClaw Gateway is active. Cloud-Edge orchestration ready.'));
 
-const port = Number(process.env.PORT) || 3000;
+const rawPort = process.env.PORT;
+const port = rawPort !== undefined ? parseInt(rawPort, 10) : 3000;
 
-console.log(`🚀 MoltClaw started on port ${port}`);
+// make sure we have a valid integer port
+const finalPort = !isNaN(port) ? port : 3000;
+
+console.log(`🚀 MoltClaw started on port ${finalPort}`);
 
 serve({
     fetch: app.fetch,
-    port,
+    port: finalPort,
 });
