@@ -1,7 +1,7 @@
 {
   "name": "moltclaw",
   "version": "0.1.0",
-  "description": "Full-featured TypeScript AI Gateway 鈥?multi-Agent routing, Fleet coordination, decision engine, and cloud orchestration",
+  "description": "Full-featured TypeScript AI Gateway – multi-Agent routing, Fleet coordination, decision engine, and cloud orchestration",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,25 @@
     "lint": "eslint src/",
     "format": "prettier --write src/"
   },
-  "keywords": ["ai-agent", "gateway", "cloud-edge", "fleet-management", "clawland"],
+  "keywords": [
+    "ai-agent",
+    "gateway",
+    "cloud-edge",
+    "fleet-management",
+    "clawland"
+  ],
   "license": "Apache-2.0",
-  "engines": { "node": ">=22.0.0" }
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/node": "^22.13.4",
+    "eslint": "^9.20.1",
+    "prettier": "^3.5.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0",
+    "vitest": "^3.0.5"
+  }
 }
