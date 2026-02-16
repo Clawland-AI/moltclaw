@@ -18,6 +18,11 @@ MoltClaw is the **cloud brain** of the Clawland ecosystem — a TypeScript-based
 - **Plugin System** — Extensible architecture for custom integrations
 - **Multi-Provider Support** — OpenAI, Anthropic, Google Gemini, local models, and more
 
+## Documentation
+
+- **[Architecture Overview](docs/architecture.md)** — High-level L3 Cloud Gateway design and Mermaid diagrams.
+- **[API Design](docs/api.md)** — Endpoint specifications and request/response schemas.
+
 ## Architecture
 
 ```
@@ -41,11 +46,11 @@ MoltClaw is the **cloud brain** of the Clawland ecosystem — a TypeScript-based
 
 - **Language:** TypeScript / Node.js
 - **Runtime:** >1GB RAM, Cloud / Mac Mini / any server
-- **Framework:** TBD (contributions welcome!)
+- **Framework:** [Hono](https://hono.dev/) with Node-server
 
 ## Status
 
-🚧 **Pre-Alpha** — Architecture design phase. Looking for contributors!
+🚧 **Pre-Alpha** — Basic HTTP gateway implemented. Looking for contributors!
 
 ## Contributing
 
