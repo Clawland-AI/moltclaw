@@ -1,14 +1,55 @@
+import { serve } from '@hono/node-server';
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+import { logger } from 'hono/logger';
+
+// MoltClaw L3 Gateway: the main hub for Clawland edge orchestration.
+// We're handles agent registration and routing here.
+
+const app = new Hono();
+
+// standard debug/cors setup
+app.use('*', logger());
+app.use('*', cors());
+
+// keep it simple for k8s/monitoring probes
+app.get('/healthz', (c) => c.json({
+    status: 'ok',
+    uptime: Math.floor(process.uptime()),
+    version: '0.1.0'
+}));
+
 /**
- * MoltClaw 鈥?Full-featured TypeScript AI Gateway
- * 
- * L3 Cloud Gateway for the Clawland edge AI agent network.
- * Handles multi-Agent routing, Fleet coordination, and cloud orchestration.
- * 
- * @see https://github.com/Clawland-AI/moltclaw
+ * Fleet Coordination Layer
+ * TODO: move these into separate route files once it gets bigger
  */
 
-const PORT = parseInt(process.env.PORT ?? '3000', 10);
+// entry point for new agents to join the network
+app.post('/api/v1/fleet/register', (c) => {
+    // @todo: implement logic to persist agent metadata
+    return c.json({
+        success: true,
+        message: 'registration accepted',
+    }, 201);
+});
 
-console.log(`馃 MoltClaw Gateway starting on port ${PORT}...`);
-console.log('   Cloud-Edge orchestration ready.');
-console.log('   Waiting for edge agent connections...');
+// simple ping to let us know the agent is still alive
+app.post('/api/v1/fleet/heartbeat', (c) => {
+    // we'll eventually use this to track fleet health in real-time
+    return c.json({ success: true, ack: true });
+});
+
+app.get('/', (c) => c.text('MoltClaw Gateway is active. Cloud-Edge orchestration ready.'));
+
+const rawPort = process.env.PORT;
+const port = rawPort !== undefined ? parseInt(rawPort, 10) : 3000;
+
+// make sure we have a valid integer port
+const finalPort = !isNaN(port) ? port : 3000;
+
+console.log(`🚀 MoltClaw started on port ${finalPort}`);
+
+serve({
+    fetch: app.fetch,
+    port: finalPort,
+});
