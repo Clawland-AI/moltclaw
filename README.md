@@ -49,7 +49,7 @@ MoltClaw is the **cloud brain** of the Clawland ecosystem — a TypeScript-based
 
 ## Contributing
 
-See the [Clawland Contributing Guide](https://github.com/Clawland-AI/.github/blob/main/CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for MoltClaw setup, development, test, style, and PR guidelines. The shared [Clawland Contributing Guide](https://github.com/Clawland-AI/.github/blob/main/CONTRIBUTING.md) also applies.
 
 **Core contributors share 20% of product revenue.** Read the [Contributor Revenue Share](https://github.com/Clawland-AI/.github/blob/main/CONTRIBUTOR-REVENUE-SHARE.md) terms.
 
